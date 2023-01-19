@@ -52,7 +52,8 @@ spec:
             failureThreshold: 3
           terminationMessagePath: /dev/termination-log
           name: httpd-example
-          command: ['sh', '-c', 'echo "Hello" > /var/www/html/index.html']
+          command: ['sh', '-c' ] 
+          args: ['echo "Hello" > /var/www/html/index.html' && 'trap exit TERM; while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
           livenessProbe:
             httpGet:
               path: /
