@@ -1,0 +1,94 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  annotations:
+    description: Defines how to deploy the application server
+    template.alpha.openshift.io/wait-for-ready: 'true'
+  name: httpd-example
+  namespace: atp
+  labels:
+    app: httpd-example
+    template: httpd-example
+    template.openshift.io/template-instance-owner: 67619bc5-bf80-404f-98da-8186930b9c88
+spec:
+  strategy:
+    type: Rolling
+    rollingParams:
+      updatePeriodSeconds: 1
+      intervalSeconds: 1
+      timeoutSeconds: 600
+      maxUnavailable: 25%
+      maxSurge: 25%
+    resources: {}
+    activeDeadlineSeconds: 21600
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - httpd-example
+        from:
+          kind: ImageStreamTag
+          namespace: atp
+          name: 'httpd-example:latest'
+        lastTriggeredImage: >-
+          image-registry.openshift-image-registry.svc:5000/atp/httpd-example@sha256:5f5499e2e071b7d3eace49f644a3dff6048c498eb40952d8cd361febe2c222b1
+    - type: ConfigChange
+  replicas: 1
+  revisionHistoryLimit: 10
+  test: false
+  selector:
+    name: httpd-example
+  template:
+    metadata:
+      name: httpd-example
+      creationTimestamp: null
+      labels:
+        name: httpd-example
+    spec:
+      volumes:
+        - name: drtest
+          persistentVolumeClaim:
+            claimName: drtest
+      containers:
+        - resources:
+            limits:
+              memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 3
+            timeoutSeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          name: httpd-example
+          command: ['sh', '-c', 'trap exit TERM; while true; do echo $(date) | tee -a /data/drtestfile; sync; sleep 1; done']
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: drtest
+              mountPath: /data
+          terminationMessagePolicy: File
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/atp/httpd-example@sha256:5f5499e2e071b7d3eace49f644a3dff6048c498eb40952d8cd361febe2c222b1
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
