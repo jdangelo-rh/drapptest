@@ -70,7 +70,7 @@ spec:
             - name: drtest
               mountPath: /data
           terminationMessagePolicy: File
-          image: registry.redhat.io/rhel8/httpd-24
+          image: registry.redhat.io/rhel8/httpd-24:1-240
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
