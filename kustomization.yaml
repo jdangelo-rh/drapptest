@@ -2,5 +2,3 @@
 resources:
 - drdeployment.yaml
 - drpvc.yaml
-- drroute.yaml
-- drservice.yaml
