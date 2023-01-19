@@ -40,22 +40,9 @@ spec:
         - resources:
             limits:
               memory: 512Mi
-            initialDelaySeconds: 3
-            timeoutSeconds: 3
-            periodSeconds: 10
-            successThreshold: 1
-            failureThreshold: 3
-          terminationMessagePath: /dev/termination-log
           name: httpd-example
           command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) | tee -a /mnt/test/outfile; sync; sleep 1; done']
-            initialDelaySeconds: 30
-            timeoutSeconds: 3
-            periodSeconds: 10
-            successThreshold: 1
-            failureThreshold: 3
-          imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: drtest
               mountPath: /data
-          terminationMessagePolicy: File
           image: 'quay.io/leandroberetta/mimik:latest'
