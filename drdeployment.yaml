@@ -20,19 +20,6 @@ spec:
       maxSurge: 25%
     resources: {}
     activeDeadlineSeconds: 21600
-  triggers:
-    - type: ImageChange
-      imageChangeParams:
-        automatic: true
-        containerNames:
-          - httpd-example
-        from:
-          kind: ImageStreamTag
-          namespace: atp
-          name: 'httpd-example:latest'
-        lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/atp/httpd-example@sha256:5f5499e2e071b7d3eace49f644a3dff6048c498eb40952d8cd361febe2c222b1
-    - type: ConfigChange
   replicas: 1
   revisionHistoryLimit: 10
   test: false
@@ -84,8 +71,7 @@ spec:
             - name: drtest
               mountPath: /data
           terminationMessagePolicy: File
-          image: >-
-            image-registry.openshift-image-registry.svc:5000/atp/httpd-example@sha256:5f5499e2e071b7d3eace49f644a3dff6048c498eb40952d8cd361febe2c222b1
+          image: registry.redhat.io/rhel8/httpd-24
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       dnsPolicy: ClusterFirst
