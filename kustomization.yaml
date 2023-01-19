@@ -1,4 +1,6 @@
 ---
 resources:
-- busybox-pvc.yaml
-- busybox-deployment.yaml
+- drdeployment.yaml
+- drpvc.yaml
+- drroute.yaml
+- drservice.yaml
