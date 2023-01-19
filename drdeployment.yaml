@@ -9,7 +9,6 @@ metadata:
   labels:
     app: httpd-example
     template: httpd-example
-    template.openshift.io/template-instance-owner: 67619bc5-bf80-404f-98da-8186930b9c88
 spec:
   strategy:
     type: Rolling
