@@ -53,17 +53,9 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             failureThreshold: 3
-          ports:
-            - containerPort: 8080
-              protocol: TCP
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - name: drtest
               mountPath: /data
           terminationMessagePolicy: File
-          image: registry.redhat.io/rhel8/httpd-24:1-240
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst
-      securityContext: {}
-      schedulerName: default-scheduler
+          image: 'quay.io/leandroberetta/mimik:latest'
