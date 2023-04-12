@@ -45,4 +45,4 @@ spec:
           volumeMounts:
             - name: drtest
               mountPath: /data
-          image: 'registry.access.redhat.com/rhscl/httpd-24-rhel7'
+          image: 'quay.io/leandroberetta/mimik:latest'
