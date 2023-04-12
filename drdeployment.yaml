@@ -38,4 +38,4 @@ spec:
               memory: 512Mi
           name: httpd-example
           command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) | tee -a /data/drtestfile.txt; sync; sleep 1; done']
-          image: 'quay.io/leandroberetta/mimik:latest'
+          image: 'registry.access.redhat.com/rhscl/httpd-24-rhel7'
