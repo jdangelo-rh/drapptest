@@ -1,11 +1,11 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: httpd-example
+  name: ose3
   namespace: atp
   labels:
-    app: httpd-example
-    template: httpd-example
+    app: ose3
+    template: ose3
   annotations:
     description: Exposes and load balances the application pods
 spec:
@@ -19,4 +19,4 @@ spec:
   ipFamilyPolicy: SingleStack
   sessionAffinity: None
   selector:
-    name: httpd-example
+    name: ose3
