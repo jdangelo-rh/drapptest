@@ -4,38 +4,38 @@ metadata:
   annotations:
     description: Defines how to deploy the application server
     template.alpha.openshift.io/wait-for-ready: 'true'
-  name: httpd-example
+  name: ose3
   namespace: atp
   labels:
-    app: httpd-example
-    template: httpd-example
+    app: ose3
+    template: ose3
 spec:
   strategy:
     type: Rolling
     rollingParams:
       updatePeriodSeconds: 1
       intervalSeconds: 1
-      timeoutSeconds: 600
+##      timeoutSeconds: 600
       maxUnavailable: 25%
       maxSurge: 25%
     resources: {}
-    activeDeadlineSeconds: 21600
+##    activeDeadlineSeconds: 21600
   replicas: 1
   revisionHistoryLimit: 10
   test: false
   selector:
-    name: httpd-example
+    name: ose3
   template:
     metadata:
-      name: httpd-example
+      name: ose3
       creationTimestamp: null
       labels:
-        name: httpd-example
+        name: ose3
     spec:
       containers:
         - resources:
             limits:
               memory: 512Mi
-          name: httpd-example
+          name: ose3
           command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) | tee -a /data/drtestfile.txt; sync; sleep 1; done']
-          image: 'registry.access.redhat.com/rhscl/httpd-24-rhel7'
+          image: 'registry.access.redhat.com/openshift3/ose-cli@sha256:04e40e6669a472250301260034e96d2bd4dace5679686433c551744898b29801'
