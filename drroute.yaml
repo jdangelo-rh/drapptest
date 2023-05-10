@@ -1,14 +1,14 @@
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
-  name: httpd-example
+  name: ose3
   namespace: atp
   labels:
-    app: httpd-example
-    template: httpd-example
+    app: ose3
+    template: ose3
 spec:
   to:
     kind: Service
-    name: httpd-example
+    name: ose3
     weight: 100
   wildcardPolicy: None
