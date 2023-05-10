@@ -39,3 +39,9 @@ spec:
           name: ose3
           command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) | tee -a /data/drtestfile.txt; sync; sleep 1; done']
           image: 'registry.access.redhat.com/openshift3/ose-cli@sha256:04e40e6669a472250301260034e96d2bd4dace5679686433c551744898b29801'
+        volumeMounts:
+        - mountPath: "/datos"
+          name: datos
+      volumes: 
+      - name: datos
+        emptyDir: {}          
