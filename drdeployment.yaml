@@ -31,6 +31,10 @@ spec:
       creationTimestamp: null
       labels:
         name: httpd-example
+      volumes:
+        - name: drtest
+          emptyDir:
+            sizeLimit: 500Mi        
     spec:
       containers:
         - resources:
@@ -39,3 +43,6 @@ spec:
           name: httpd-example
           command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) > /data/drtestfile.txt; sync; sleep 1; done']
           image: 'registry.access.redhat.com/rhscl/httpd-24-rhel7'
+          volumeMounts:
+            - name: drtest
+              mountPath: /data
