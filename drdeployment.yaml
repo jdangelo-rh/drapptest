@@ -30,12 +30,12 @@ spec:
       name: httpd-example
       creationTimestamp: null
       labels:
-        name: httpd-example
+        name: httpd-example  
+    spec:
       volumes:
         - name: drtest
           emptyDir:
-            sizeLimit: 500Mi        
-    spec:
+            sizeLimit: 500Mi          
       containers:
         - resources:
             limits:
