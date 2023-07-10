@@ -5,7 +5,6 @@ metadata:
     description: Defines how to deploy the application server
     template.alpha.openshift.io/wait-for-ready: 'true'
   name: httpd-example
-  namespace: atp
   labels:
     app: httpd-example
     template: httpd-example
