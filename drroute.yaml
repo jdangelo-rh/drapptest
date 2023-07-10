@@ -2,7 +2,6 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   name: httpd-example
-  namespace: atp
   labels:
     app: httpd-example
     template: httpd-example
