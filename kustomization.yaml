@@ -3,3 +3,4 @@ resources:
 - drdeployment.yaml
 - drpvc.yaml
 - namespace.yaml
+- drservice.yaml
