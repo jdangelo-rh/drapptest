@@ -40,7 +40,8 @@ spec:
             limits:
               memory: 512Mi
           name: httpd-example
-          command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) | tee -a /data/drtestfile.txt; sync; sleep 1; done']
+####          command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date) | tee -a /data/drtestfile.txt; sync; sleep 1; done']
+          command: ['sh', '-c' , 'trap exit TERM; while true; do echo $(date); sync; sleep 1; done']
           volumeMounts:
             - name: drtest
               mountPath: /data
